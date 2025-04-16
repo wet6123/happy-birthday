@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>생일 파티 초대장</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f7f7;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .invitation-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ffd700, #ff9500);
+            opacity: 0.15;
+        }
+        
+        .decoration-1 {
+            top: -60px;
+            left: -60px;
+        }
+        
+        .decoration-2 {
+            bottom: -60px;
+            right: -60px;
+        }
+        
+        .title-image {
+            max-width: 100px;
+            border-radius: 100%;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .highlight {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+        
+        .date-time {
+            font-size: 1.5rem;
+            margin: 30px 0;
+            color: #555;
+        }
+        
+        .schedule {
+            margin: 40px 0;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .schedule-item {
+            display: grid;
+            grid-template-columns: 150px 100px 1fr;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
+        
+        .schedule-time {
+            color: #ff6b6b;
+            font-weight: 500;
+        }
+        
+        .schedule-title {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .schedule-desc {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .location {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            color: #555;
+        }
+        
+        .address {
+            font-size: 1.1rem;
+            margin: 15px 0 30px;
+            color: #777;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+        
+        .map-container {
+            margin: 40px 0;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .rsvp {
+            margin: 40px 0 20px;
+            font-size: 1.2rem;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            margin: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .host-image {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+        
+        @media (max-width: 600px) {
+            .invitation-card {
+                padding: 25px;
+                margin-top: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .date-time, .location {
+                font-size: 1.2rem;
+            }
+            
+            .schedule-item {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+            
+            .schedule-time {
+                margin-bottom: 5px;
+            }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffd700;
+            opacity: 0.8;
+            animation: fall 5s linear infinite;
+            top: 0;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="invitation-card">
+            <div class="decoration decoration-1"></div>
+            <div class="decoration decoration-2"></div>
+            
+            <img src="king-god-one-sun.jpeg" alt="King God One Sun" class="title-image">
+            
+            <h1>당신을 초대합니다!</h1>
+            
+            <p class="message">
+              <span class="highlight">天无二日</span>(tiān wú 'èr rì) 하늘에 두 개의 해는 없다(One sun)는 뜻이에요.<br>
+              소중한 당신을 <span class="highlight">원썬 한유연</span>님의 생일 파티에 초대합니다.
+            </p>
+            
+            <div class="date-time">
+                <span class="highlight">4월 18일 목요일</span><br>
+                저녁 7시
+            </div>
+            
+            
+            <div class="location">
+              <span>장소: </span>
+              <span class="highlight">웍셔너리</span>
+            </div>
+            
+            <div class="address">
+              서울특별시 강남구 신사동 도산대로53길 12
+            </div>
+            
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.322776519747!2d127.03593247636331!3d37.523887872049734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca34776c792c7%3A0xde62fa0dac58854c!2z7JuN7IWU64SI66as!5e0!3m2!1sko!2skr!4v1744811569414!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <h2>행사 일정</h2>
+
+            <div class="schedule">
+                <div class="schedule-item">
+                    <span class="schedule-time">19:00 - 19:10</span>
+                    <span class="schedule-title">입장</span>
+                    <span class="schedule-desc">식당 "웍셔너리" 입장</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">19:10 - 19:20</span>
+                    <span class="schedule-title">준비 체조</span>
+                    <span class="schedule-desc">안전을 위한 준비 체조 및 이용 안내</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">19:20 - 19:30</span>
+                    <span class="schedule-title">선물 전달식</span>
+                    <span class="schedule-desc">막간을 이용한 선물 전달식 거행</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">19:30 - 20:30</span>
+                    <span class="schedule-title">석식</span>
+                    <span class="schedule-desc">배연지양의 웍셔너리 10만원권 후원</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">20:30 - 21:00</span>
+                    <span class="schedule-title">다과회</span>
+                    <span class="schedule-desc">활기찬 인생2막을 만들어가는 카페, 다사랑실버카페에서 다과회 진행 (변경 가능)</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">21:00 - 21:10</span>
+                    <span class="schedule-title">마무리</span>
+                    <span class="schedule-desc">행복이 넘치는 웍셔너리에서 다시 만나요~</span>
+                </div>
+            </div>
+
+            <h2>후원</h2>
+            
+            <img src="super-hot-guy.jpeg" alt="Super Hot Guy" class="host-image">
+
+            <div>21st century Ubiquitous man</div>
+            <div><span class="highlight">Jason-Bae</span></div>
+
+            <img src="baebae.jpeg" alt="baebae" class="host-image">
+
+            <div><span class="highlight">연지배배 & 이인섭군</span></div>
+
+            <img src="icecream-bot.jpeg" alt="Icecream Bot" class="host-image">
+
+            <div>아이스크림 추천 해드립니다.</div>
+            <div><span class="highlight">icebar_recommend_bot</span></div>
+            
+            <div class="rsvp">
+                <p>참석 여부를 알려주세요</p>
+                <a href="sms:010-2302-6123" class="button">연락하기</a>
+            </div>
+            
+            <div class="footer">
+                문의사항이 있으시면 언제든지 연락주세요!
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 색종이 효과
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#a78bfa', '#ff9500'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                
+                document.body.appendChild(confetti);
+            }
+        }
+        
+        window.addEventListener('load', createConfetti);
+    </script>
+</body>
+</html>
